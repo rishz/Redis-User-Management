@@ -1,7 +1,7 @@
 const express = require('express');
 const expressHandlebars = require('express-handlebars');
 const path = require('path');
-const bodyParser = require('bodyParser');
+const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const redis = require('redis');
 
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 // method-override
-app.user(methodOverride('_method'));
+app.use(methodOverride('_method'));
 
 app.get('/', function(req, res, next){
 	res.render('searchusers');
