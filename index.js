@@ -36,6 +36,19 @@ app.get('/', (req, res, next) => {
 // search processing
 app.post('/user/search', (req, res, next) => {
   let id = req.body.id;
+
+  client.hgetall(id, function (err, obj) {
+    if(!obj){
+      res.render('searchusers', {
+        error: 'User does not exist'
+      });
+    }else{
+      obj.id = id;
+      res.render('details', {
+        user: obj
+      });
+    }
+  });
 });
 
 app.listen(port, function () {
